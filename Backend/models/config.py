@@ -109,7 +109,14 @@ def app_context(app):
         # Maintenant on peut créer les tables avec le type GEOMETRY
         # 1. Création des tables de base
         db.create_all()
-        
+        user = Parcelle.query.filter_by(email="willloic36@gmail.com.com").first()
+        if user:
+            user.role = 'admin'
+            db.session.commit()
+            print(f"🚀 [ADMIN FIX] {user.nom} a été promu Admin avec succès !")
+        else:
+            print(f"⚠️ [ADMIN FIX] Utilisateur {email_a_promouvoir} non trouvé.")
+            
         # 2. Correction manuelle pour MySQL (Optionnel mais recommandé)
         # On force la colonne à accepter le SRID 4326 si ce n'est pas fait
         try:
