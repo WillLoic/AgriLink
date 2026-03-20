@@ -4,16 +4,9 @@ streamlit==1.54.0
 streamlit-js-eval==0.1.7
 
 
-# Image processing
-Pillow==10.1.0
-
-
 # HTTP requests
 requests==2.31.0
 
-
-# Database
-PyMySQL==1.1.0
 
 
 # Cryptographie
@@ -21,9 +14,3 @@ cryptography==41.0.7
 
 # Python-dotenv (pour les variables d'environnement)
 python-dotenv==1.0.0
-
-# Database
-PyMySQL==1.1.0
-
-
-gunicorn==21.2.0
