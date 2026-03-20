@@ -24,6 +24,18 @@ if 'token' not in st.session_state or st.session_state['token'] is None:
 API_URL = os.getenv("API_URL", "http://127.0.0.1:5000")
 
 # --- CONFIGURATION ---
+
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            .stAppDeployButton {display:none;}
+            [data-testid="stToolbar"] {display:none;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 st.set_page_config(page_title="Historique des analyses", layout="wide")
 st.markdown("""
     <style>
