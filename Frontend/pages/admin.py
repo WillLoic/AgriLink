@@ -116,6 +116,18 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
+
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            .stAppDeployButton {display:none;}
+            [data-testid="stToolbar"] {display:none;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 API_URL = os.getenv("API_URL", "http://127.0.0.1:5000")
 # --- FONCTIONS UTILITAIRES ---
 def get_all_users():
