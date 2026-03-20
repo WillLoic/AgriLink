@@ -1,51 +1,10 @@
-# Flask ecosystem
-Flask==2.3.3
-Flask-CORS==4.0.0
-Flask-SQLAlchemy==3.0.5
-Flask-Marshmallow==1.2.1
-Flask-Bcrypt==1.0.1
-Flask-Mail==0.9.1
-Flasgger==0.9.7
-
 # Streamlit ecosystem
 streamlit==1.54.0
 streamlit-js-eval==0.1.7
 
-# Google AI
-google-genai==0.8.0
-
-# Image processing
-Pillow==10.1.0
-
-# PDF generation
-fpdf==1.7.2
 
 # HTTP requests
 requests==2.31.0
 
-# JWT
-PyJWT==2.8.0
-
-# Database
-PyMySQL==1.1.0
-
-# Testing
-pytest==7.4.3
-
-# Werkzeug (pour Flask)
-Werkzeug==2.3.7
-
-# Cryptographie
-cryptography==41.0.7
-
 # Python-dotenv (pour les variables d'environnement)
 python-dotenv==1.0.0
-
-# Database
-PyMySQL==1.1.0
-
-# Werkzeug (pour Flask)
-Werkzeug==2.3.7
-
-
-gunicorn==21.2.0
