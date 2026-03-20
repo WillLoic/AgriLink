@@ -12,6 +12,18 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            .stAppDeployButton {display:none;}
+            [data-testid="stToolbar"] {display:none;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
+
 
 # --- CONFIGURATION ---
 st.set_page_config(page_title="Réinitialiser mot de passe - AgriLink", layout="centered")
