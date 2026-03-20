@@ -111,7 +111,7 @@ with tab2:
             phone_reg = st.text_input("Numéro de téléphone")
         with col2:
             password_reg = st.text_input("Mot de passe", type="password")
-            culture = st.selectbox("Type de culture", ["Maïs", "Riz", "Cacao", "Café", "Manioc"])
+            culture = st.selectbox("Type de culture", ["Maïs", "Riz", "Cacao", "Café", "Manioc", "Tomates", "Pommes de terre", "Blé", "Soja", "Arachide"])
 
         st.write("---")
         st.write("📍 **Délimitation de la parcelle**")
