@@ -122,7 +122,7 @@ def main():
                         response = requests.post(
                             f"{API_URL}/api/v1/forgot-password",
                             data={"email": email},
-                            timeout=10
+                            timeout=50
                         )
 
                         if response.status_code == 200:
