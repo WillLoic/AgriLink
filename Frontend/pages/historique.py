@@ -20,7 +20,7 @@ if 'token' not in st.session_state or st.session_state['token'] is None:
     st.switch_page("pages/auth.py")
     st.stop()
 
-API_URL = "http://127.0.0.1:5000"
+API_URL = os.getenv("API_URL", "http://127.0.0.1:5000")
 
 # --- CONFIGURATION ---
 st.set_page_config(page_title="Historique des analyses", layout="wide")
