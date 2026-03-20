@@ -5,9 +5,13 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, text, func
 from sqlalchemy.types import UserDefinedType
 from flask_bcrypt import Bcrypt
+import os
 
 
-
+uri = os.getenv("SQLALCHEMY_DATABASE_URI")
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 db=SQLAlchemy()
 ma = Marshmallow()
