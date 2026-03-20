@@ -316,7 +316,11 @@ def forgot_password():
     if not email:
         return jsonify({"error": "Email requis"}), 400
 
-    return service.request_password_reset(email)
+    # On récupère le résultat du service (qui est un tuple)
+    result, status_code = service.request_password_reset(email)
+    
+    # ON FORCE LE JSON ICI
+    return jsonify(result), status_code
 
 
 @app.route('/api/v1/reset-password', methods=['POST'])
