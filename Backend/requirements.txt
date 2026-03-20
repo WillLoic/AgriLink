@@ -5,7 +5,7 @@ Flask-SQLAlchemy==3.0.5
 Flask-Marshmallow==1.2.1
 Flask-Bcrypt==1.0.1
 Flask-Mail==0.9.1
-Flasgger==0.9.7
+flasgger
 
 
 # Google AI
