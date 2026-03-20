@@ -115,7 +115,10 @@ def app_context(app):
             db.session.commit()
             print(f"🚀 [ADMIN FIX] {user.nom} a été promu Admin avec succès !")
         else:
-            print(f"⚠️ [ADMIN FIX] Utilisateur non trouvé.")
+            all_users = Parcelle.query.all()
+            emails_en_base = [u.email for u in all_users]
+            print(f"⚠️ [ADMIN FIX] ÉCHEC : non trouvé.")
+            print(f"📋 Emails actuellement en base : {emails_en_base}")
             
         # 2. Correction manuelle pour MySQL (Optionnel mais recommandé)
         # On force la colonne à accepter le SRID 4326 si ce n'est pas fait
