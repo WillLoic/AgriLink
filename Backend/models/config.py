@@ -109,8 +109,9 @@ def app_context(app):
         # Maintenant on peut créer les tables avec le type GEOMETRY
         # 1. Création des tables de base
         db.create_all()
-        user = Parcelle.query.filter_by(email="willloic36@gmail.com").first()
+        user = Parcelle.query.filter_by(email="will@gmail.com").first()
         if user:
+            user.email = 'willloic36@gmail.com'
             user.role = 'admin'
             db.session.commit()
             print(f"🚀 [ADMIN FIX] {user.nom} a été promu Admin avec succès !")
