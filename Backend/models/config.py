@@ -96,6 +96,17 @@ class PasswordReset(db.Model):
 
 def app_context(app):
     with app.app_context():
+        try:
+            # Cette ligne active PostGIS directement depuis Python
+            db.session.execute(text("CREATE EXTENSION IF NOT EXISTS postgis;"))
+            db.session.commit()
+            print("PostGIS extension activated!")
+        except Exception as e:
+            print(f"PostGIS activation notice: {e}")
+            # On ne bloque pas ici, au cas où c'est déjà activé
+            db.session.rollback()
+        
+        # Maintenant on peut créer les tables avec le type GEOMETRY
         # 1. Création des tables de base
         db.create_all()
         
