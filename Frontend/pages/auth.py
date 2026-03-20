@@ -40,7 +40,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-API_URL = "http://127.0.0.1:5000"
+API_URL = os.getenv("API_URL", "http://127.0.0.1:5000")
 
 # --- GESTION DE LA SESSION ---
 if 'token' not in st.session_state:
