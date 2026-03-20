@@ -173,7 +173,7 @@ def main():
             else:
                 with st.spinner("Réinitialisation du mot de passe..."):
                     try:
-                        API_URL = "http://127.0.0.1:5000"
+                        API_URL = os.getenv("API_URL", "http://127.0.0.1:5000")
                         response = requests.post(
                             f"{API_URL}/api/v1/reset-password",
                             data={
