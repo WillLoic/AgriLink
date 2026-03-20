@@ -12,7 +12,7 @@ flasgger
 google-genai==0.8.0
 
 # Image processing
-Pillow==10.1.0
+Pillow
 
 # PDF generation
 fpdf==1.7.2
