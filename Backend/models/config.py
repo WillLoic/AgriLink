@@ -8,11 +8,14 @@ from flask_bcrypt import Bcrypt
 import os
 
 
-uri = os.getenv("SQLALCHEMY_DATABASE_URI")
-if uri and uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
-app.config['SQLALCHEMY_DATABASE_URI'] = uri
-
+def setup_db(app):
+    """Fonction pour lier la base de données à l'application"""
+    uri = os.getenv("SQLALCHEMY_DATABASE_URI")
+    if uri and uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    app.config['SQLALCHEMY_DATABASE_URI'] = uri
 db=SQLAlchemy()
 ma = Marshmallow()
 
