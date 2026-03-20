@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 from datetime import datetime
+import os
 
 # --- CONFIGURATION ---
 st.set_page_config(page_title="Mot de passe oublié - AgriLink", layout="centered")
