@@ -3,7 +3,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_mail import Mail
 import click
-from models.config import db, ma, app_context
+from models.config import db, ma, app_context, setup_db
 from datetime import datetime
 from flasgger import Swagger
 
@@ -48,6 +48,7 @@ app.config['SWAGGER'] = {
 
 swagger = Swagger(app)
 # --- INITIALISATION DES EXTENSIONS ---
+setup_db(app)
 db.init_app(app)  # C'est ici que la liaison se fait proprement
 ma.init_app(app)
 #with app.app_context():
