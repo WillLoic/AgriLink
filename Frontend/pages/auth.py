@@ -8,6 +8,18 @@ import os
 
 
 # --- CONFIGURATION DE LA PAGE ---
+
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            .stAppDeployButton {display:none;}
+            [data-testid="stToolbar"] {display:none;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 st.set_page_config(
     page_title="AgriLink - Analyse Agricole IA",
     page_icon="🌱",
