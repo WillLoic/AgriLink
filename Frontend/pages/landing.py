@@ -364,7 +364,7 @@ st.markdown("""
     <div class="footer">
         <p><strong>AgriLink</strong> - Révolutionnez votre agriculture avec l'IA</p>
         <p style="font-size: 0.9em;">
-            🏢 Siège social | 📧 contact@agrilink.com | 📞 +237 XX XX XX XX
+            🏢 Siège social | 📧 willloic36@gmail.com | 📞 +237 692 25 34 74
         </p>
         <p style="font-size: 0.8em; margin-top: 20px;">
             © 2026 AgriLink. Tous droits réservés. | Conditions générales | Politique de confidentialité
