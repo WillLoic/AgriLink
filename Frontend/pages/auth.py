@@ -111,8 +111,8 @@ with tab1:
     st.markdown("</div>", unsafe_allow_html=True)
 
 with tab2:
-    if 'points_gps' not in st.session_state:
-        st.session_state['points_gps'] = []
+    #if 'points_gps' not in st.session_state:
+        #st.session_state['points_gps'] = []
 
     st.subheader("Créer un compte agriculteur")
     
@@ -127,15 +127,15 @@ with tab2:
             culture = st.selectbox("Type de culture", ["Maïs", "Riz", "Cacao", "Café", "Manioc", "Tomates", "Pommes de terre", "Blé", "Soja", "Arachide"])
 
         st.write("---")
-        st.write("📍 **Délimitation de la parcelle**")
+        #st.write("📍 **Délimitation de la parcelle**")
         
-        if st.session_state['points_gps']:
-            st.write(f"✅ {len(st.session_state['points_gps'])} points enregistrés")
+        #if st.session_state['points_gps']:
+            #st.write(f"✅ {len(st.session_state['points_gps'])} points enregistrés")
         
         submitted_reg = st.form_submit_button("Finaliser l'inscription")
 
     # Capture GPS Hors Formulaire
-    loc = get_geolocation()
+    """loc = get_geolocation()
     col_gps1, col_gps2 = st.columns(2)
     with col_gps1:
         if st.button("📌 Ajouter l'angle actuel"):
@@ -149,16 +149,16 @@ with tab2:
     with col_gps2:
         if st.button("🗑️ Reset points"):
             st.session_state['points_gps'] = []
-            st.rerun()
+            st.rerun()"""
 
     if submitted_reg:
-        if len(st.session_state['points_gps']) < 3:
-            st.error("Besoin de 3 points minimum.")
-        else:
+        #if len(st.session_state['points_gps']) < 3:
+            #st.error("Besoin de 3 points minimum.")
+        #else:
             data_reg = {
                 "nom": nom, "email": email, "phone": phone_reg,
                 "password": password_reg, "culture_type": culture,
-                "coords": json.dumps(st.session_state['points_gps'])
+                "coords": None
             }
             res = requests.post(f"{API_URL}/api/v1/register", data=data_reg)
             
