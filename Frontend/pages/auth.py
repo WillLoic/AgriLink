@@ -135,21 +135,21 @@ with tab2:
         submitted_reg = st.form_submit_button("Finaliser l'inscription")
 
     # Capture GPS Hors Formulaire
-    """loc = get_geolocation()
-    col_gps1, col_gps2 = st.columns(2)
-    with col_gps1:
-        if st.button("📌 Ajouter l'angle actuel"):
-            if loc:
-                lat = loc['coords']['latitude']
-                lng = loc['coords']['longitude']
-                st.session_state['points_gps'].append([lat, lng])
-                st.rerun()
-            else:
-                st.warning("Activez le GPS.")
-    with col_gps2:
-        if st.button("🗑️ Reset points"):
-            st.session_state['points_gps'] = []
-            st.rerun()"""
+    #loc = get_geolocation()
+    #col_gps1, col_gps2 = st.columns(2)
+    #with col_gps1:
+        #if st.button("📌 Ajouter l'angle actuel"):
+            #if loc:
+                #lat = loc['coords']['latitude']
+                #lng = loc['coords']['longitude']
+                #st.session_state['points_gps'].append([lat, lng])
+                #st.rerun()
+            #else:
+                #st.warning("Activez le GPS.")
+    #with col_gps2:
+        #if st.button("🗑️ Reset points"):
+            #st.session_state['points_gps'] = []
+            #st.rerun()
 
     if submitted_reg:
         #if len(st.session_state['points_gps']) < 3:
