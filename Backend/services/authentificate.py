@@ -37,10 +37,10 @@ class AgriculteurModels():
             wkt_points = ", ".join([f"{p[0]} {p[1]}" for p in points])
             wkt_polygon = f"POLYGON(({wkt_points}))"
             # 4. Insertion en base de données avec SQLAlchemy text()
-            sql = text("""
+            sql = text(
                     INSERT INTO parcelles (nom, phone, email, password, created_at, culture_type, geometrie) 
                     VALUES (:nom, :phone, :email, :password, :created_at, :culture_type, ST_GeomFromText(:poly, 4326))
-                """)
+                )
                 
             result=db.session.execute(sql, {"nom":nom, "phone":phone, "email":email, "password":password, "created_at":datetime.utcnow(), "culture_type":culture_type,"poly":wkt_polygon})
 
