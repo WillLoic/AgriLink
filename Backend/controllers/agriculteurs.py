@@ -353,13 +353,16 @@ def reset_password():
     service = PasswordResetService()
 
     token = request.form.get('token')
-    print(token) # Debug rigoureux
+    #print(token) # Debug rigoureux
     new_password = request.form.get('new_password')
 
     if not token or not new_password:
         return jsonify({"error": "Token et nouveau mot de passe requis"}), 400
 
-    return service.reset_password(token, new_password)
+    result, status_code = service.reset_password(token, new_password)
+    
+    # ON FORCE LE JSON ICI
+    return jsonify(result), status_code
 
 
 @app.route('/api/v1/analytics', methods=['GET'])
