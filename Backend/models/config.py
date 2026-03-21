@@ -49,7 +49,7 @@ class Parcelle(db.Model):
     password=db.Column(db.String(255),nullable=False)
     created_at=db.Column(db.Date,default=datetime.utcnow)
     culture_type = db.Column(db.String(50), nullable=False)
-    geometrie = db.Column(Geometry, nullable=False)
+    geometrie = db.Column(Geometry, nullable=True)
     role = db.Column(db.String(20), default='user') # 'user' ou 'admin'
     #latitude_init = db.Column(db.Float, nullable=False)
     #longitude_init = db.Column(db.Float, nullable=False)
