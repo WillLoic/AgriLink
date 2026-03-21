@@ -10,6 +10,7 @@ bcrypt=Bcrypt()
 
 
 class AgriculteurModels():
+    """
     def register(self):
         try:
             nom = request.form['nom']
@@ -59,7 +60,51 @@ class AgriculteurModels():
             return jsonify({'msg':'Inscription reussi'}),200
         except Exception as e:
             db.session.rollback()
+            return jsonify({'error': str(e)}), 500"""
+
+    def register(self):
+        try:
+            nom = request.form['nom']
+            phone = request.form['phone']
+            email = request.form['email']
+            password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
+            culture_type = request.form.get('culture_type')
+            
+            new_parcelle = Parcelle(
+            nom=nom,
+            phone=phone,
+            email=email,
+            password=password,
+            created_at=datetime.utcnow(),
+            culture_type=culture_type,
+            role='user',
+            geometrie=None # SQLAlchemy transformera ça en NULL pour Postgres ou MySQL
+            )
+
+            db.session.add(new_parcelle)
+            db.session.commit() # L'ID est généré ici
+            
+            # 2. Rigueur : Récupérer l'ID de manière universelle
+            # SQLAlchemy rafraîchit l'objet automatiquement après le commit
+            parcelle_id = new_parcelle.id 
+
+            # Logger l'événement
+            from services.password_reset import AnalyticsService
+            analytics = AnalyticsService()
+            analytics.log_event('register', parcelle_id, {
+                'email': email,
+                'culture_type': culture_type,
+                'ip_address': request.remote_addr
+            })
+
+            return jsonify({'msg':'Inscription réussie'}), 200
+
+        except Exception as e:
+            db.session.rollback()
+            print(f"❌ Erreur Inscription: {str(e)}")
             return jsonify({'error': str(e)}), 500
+
+
     def login(self):
         password = request.form['password']
         phone = request.form['phone']
