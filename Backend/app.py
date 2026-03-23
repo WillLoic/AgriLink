@@ -29,7 +29,9 @@ app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', 'noreply@agri-link.com')
 print(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])  # Debug : vérifier les variables d'environnement
-mail = Mail(app)
+#mail = Mail(app)
+mail=Mail()
+
 
 # Configuration simple de Swagger
 app.config['SWAGGER'] = {
@@ -51,6 +53,7 @@ swagger = Swagger(app)
 setup_db(app)
 db.init_app(app)  # C'est ici que la liaison se fait proprement
 ma.init_app(app)
+mail.init_app(app)
 #with app.app_context():
 app_context(app) # On lance tes corrections MySQL
 
