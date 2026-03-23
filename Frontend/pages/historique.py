@@ -118,7 +118,7 @@ def get_score_badge(facteur):
 
 # --- RÉCUPÉRATION DES DONNÉES ---
 headers = {"Authorization": f"Bearer {st.session_state['token']}"}
-res = requests.get(f"{API_URL}/api/v1/dashboard/stats", headers=headers, timeout=5)
+res = requests.get(f"{API_URL}/api/v1/dashboard/stats", headers=headers, timeout=30)
 
 if res.status_code == 200:
     stats = res.json()
