@@ -312,16 +312,14 @@ def forgot_password():
     from services.password_reset import PasswordResetService
     service = PasswordResetService()
 
-    email = request.form.get('email')
-    if not email:
+    data = request.get_json() 
+    if not data or 'email' not in data:
         return jsonify({"error": "Email requis"}), 400
 
-    # On récupère le résultat du service (qui est un tuple)
-    result, status_code = service.request_password_reset(email)
+    email = data.get('email')
     
-    # ON FORCE LE JSON ICI
+    result, status_code = service.request_password_reset(email)
     return jsonify(result), status_code
-
 
 @app.route('/api/v1/reset-password', methods=['POST'])
 def reset_password():
