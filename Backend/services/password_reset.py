@@ -6,6 +6,7 @@ from models.config import db, Parcelle, Analytics, PasswordReset, Scan
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 from models.config import mail
+import request
 
 bcrypt = Bcrypt()
 
@@ -19,61 +20,53 @@ class PasswordResetService:
         return secrets.token_urlsafe(32)
 
     def send_reset_email(self, email, reset_token):
-        """Envoie un email de réinitialisation de mot de passe"""
+        """Envoie un email de réinitialisation de mot de passe via Brevo API"""
         
-        try:
-            base_url = os.getenv('FRONTEND_URL', 'http://localhost:8501')
-            reset_url = f"{base_url}/reset_password?token={reset_token}"
-
-            msg = Message(
-                subject='Réinitialisation de votre mot de passe AgriLink',
-                sender=os.getenv('MAIL_USERNAME'),
-                recipients=[email]
-            )
-
-            msg.html = f"""
-            <html>
-            <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                <div style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-                    <h1>🔐 Réinitialisation de mot de passe</h1>
-                    <p>AgriLink - Analyse Agricole IA</p>
+        # 1. Préparation de l'URL de reset
+        base_url = os.getenv('FRONTEND_URL', 'http://localhost:8501')
+        reset_url = f"{base_url}/reset_password?token={reset_token}"
+    
+        # 2. Configuration API
+        api_key = os.getenv("BREVO_API_KEY")
+        url = "https://api.brevo.com/v3/smtp/email" # URL corrigée
+        
+        payload = {
+            "sender": {"name": "AgriLink", "email": "willloic36@gmail.com"},
+            "to": [{"email": email}],
+            "subject": "Réinitialisation de mot de passe - AgriLink",
+            "htmlContent": f"""
+                <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+                    <h3>Réinitialisation de votre mot de passe</h3>
+                    <p>Bonjour,</p>
+                    <p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p>
+                    <p><a href='{reset_url}' style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Réinitialiser mon mot de passe</a></p>
+                    <p>Si vous n'êtes pas à l'origine de cette demande, ignorez cet email.</p>
+                    <p>L'équipe AgriLink</p>
                 </div>
-
-                <div style="background: white; padding: 30px; border: 1px solid #ddd; border-radius: 0 0 10px 10px;">
-                    <h2>Bonjour,</h2>
-
-                    <p>Vous avez demandé la réinitialisation de votre mot de passe sur la plateforme AgriLink.</p>
-
-                    <p>Cliquez sur le bouton ci-dessous pour définir un nouveau mot de passe :</p>
-
-                    <div style="text-align: center; margin: 30px 0;">
-                        <a href="{reset_url}" style="background: #4CAF50; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
-                            🔑 Réinitialiser mon mot de passe
-                        </a>
-                    </div>
-
-                    <p><strong>⚠️ Important :</strong> Ce lien expirera dans 1 heure pour des raisons de sécurité.</p>
-
-                    <p>Si vous n'avez pas demandé cette réinitialisation, ignorez simplement cet email.</p>
-
-                    <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
-
-                    <p style="color: #666; font-size: 12px;">
-                        Cordialement,<br>
-                        L'équipe AgriLink<br>
-                        🌱 Analyse agricole intelligente
-                    </p>
-                </div>
-            </body>
-            </html>
             """
-
-            mail.send(msg)
-            return True
+        }
+        
+        headers = {
+            "accept": "application/json",
+            "api-key": api_key,
+            "content-type": "application/json"
+        }
+    
+        # 3. Envoi de la requête
+        try:
+            response = requests.post(url, json=payload, headers=headers, timeout=10)
+            
+            if response.status_code in [201, 200]:
+                print(f"✅ EMAIL ENVOYÉ VIA API (Brevo) à {email}")
+                return True
+            else:
+                # Très important pour débugger sur Render si la clé est mauvaise
+                print(f"❌ ERREUR API BREVO : {response.status_code} - {response.text}")
+                return False
+                
         except Exception as e:
-            print(f"Erreur lors de l'envoi de l'email: {str(e)}")
+            print(f"❌ ERREUR RÉSEAU API : {str(e)}")
             return False
-
     def request_password_reset(self, email):
         """Demande de réinitialisation de mot de passe"""
         try:
