@@ -33,7 +33,7 @@ app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', 'willloic36@gmail.com')
 #print(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])  # Debug : vérifier les variables d'environnement
 #mail = Mail(app)
-mail=Mail()
+#mail=Mail()
 
 
 # Configuration simple de Swagger
