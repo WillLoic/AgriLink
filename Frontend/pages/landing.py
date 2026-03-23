@@ -12,6 +12,8 @@ hide_st_style = """
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
+st.set_page_config(page_title="Administration - AgriLink", layout="wide")
+LOGO_URL= "https://github.com/WillLoic/AgriLink/blob/developpement/Frontend/icon2.jpg"
 
 st.set_page_config(
     page_title="AgriLink - Révolutionnez votre agriculture",
