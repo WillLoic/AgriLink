@@ -5,6 +5,7 @@ from flask import current_app
 from models.config import db, Parcelle, Analytics, PasswordReset, Scan
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
+from models.config import mail
 
 bcrypt = Bcrypt()
 
@@ -19,7 +20,7 @@ class PasswordResetService:
 
     def send_reset_email(self, email, reset_token):
         """Envoie un email de réinitialisation de mot de passe"""
-        from models.config import mail
+        
         try:
             base_url = os.getenv('FRONTEND_URL', 'http://localhost:8501')
             reset_url = f"{base_url}/reset_password?token={reset_token}"
