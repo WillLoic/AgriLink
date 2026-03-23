@@ -6,7 +6,7 @@ from models.config import db, Parcelle, Analytics, PasswordReset, Scan
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 from models.config import mail
-import request
+import requests
 
 bcrypt = Bcrypt()
 
