@@ -152,6 +152,7 @@ with tab2:
             #st.rerun()
 
     if submitted_reg:
+       with st.spinner("Inscription / Connexion en cours..."):
         #if len(st.session_state['points_gps']) < 3:
             #st.error("Besoin de 3 points minimum.")
         #else:
