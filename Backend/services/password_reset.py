@@ -68,7 +68,7 @@ class PasswordResetService:
             </html>
             """
 
-            #mail.send(msg)
+            mail.send(msg)
             return True
         except Exception as e:
             print(f"Erreur lors de l'envoi de l'email: {str(e)}")
