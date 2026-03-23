@@ -312,11 +312,19 @@ def forgot_password():
     from services.password_reset import PasswordResetService
     service = PasswordResetService()
 
-    data = request.get_json() 
-    if not data or 'email' not in data:
-        return jsonify({"error": "Email requis"}), 400
+    # RIGUEUR : On vérifie le JSON d'abord, puis le formulaire si le JSON est vide
+    data = request.get_json(silent=True)
+    email = None
 
-    email = data.get('email')
+    if data:
+        email = data.get('email')
+    else:
+        email = request.form.get('email')
+
+    if not email:
+        # Debug pour voir ce que le serveur reçoit réellement dans les logs Render
+        print(f"DEBUG REQUÊTE : Content-Type={request.content_type}, Data={request.data}")
+        return jsonify({"error": "Email requis"}), 400
     
     result, status_code = service.request_password_reset(email)
     return jsonify(result), status_code
