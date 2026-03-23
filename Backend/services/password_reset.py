@@ -10,7 +10,8 @@ bcrypt = Bcrypt()
 
 class PasswordResetService:
     def __init__(self):
-        self.mail = Mail(current_app)
+        #self.mail = Mail(current_app)
+        pass
 
     def generate_reset_token(self):
         """Génère un token sécurisé pour la réinitialisation"""
@@ -18,12 +19,14 @@ class PasswordResetService:
 
     def send_reset_email(self, email, reset_token):
         """Envoie un email de réinitialisation de mot de passe"""
+        from app import mail
         try:
-            reset_url = f"http://localhost:8501/reset_password?token={reset_token}"
+            base_url = os.getenv('FRONTEND_URL', 'http://localhost:8501')
+            reset_url = f"{base_url}/reset_password?token={reset_token}"
 
             msg = Message(
                 subject='Réinitialisation de votre mot de passe AgriLink',
-                sender=os.getenv('FROM_EMAIL', 'noreply@agri-link.com'),
+                sender=os.getenv('MAIL_USERNAME'),
                 recipients=[email]
             )
 
@@ -64,7 +67,7 @@ class PasswordResetService:
             </html>
             """
 
-            self.mail.send(msg)
+            mail.send(msg)
             return True
         except Exception as e:
             print(f"Erreur lors de l'envoi de l'email: {str(e)}")
