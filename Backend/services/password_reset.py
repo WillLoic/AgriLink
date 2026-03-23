@@ -19,7 +19,7 @@ class PasswordResetService:
 
     def send_reset_email(self, email, reset_token):
         """Envoie un email de réinitialisation de mot de passe"""
-        from app import mail
+        from models.config import mail
         try:
             base_url = os.getenv('FRONTEND_URL', 'http://localhost:8501')
             reset_url = f"{base_url}/reset_password?token={reset_token}"
