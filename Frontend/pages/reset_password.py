@@ -193,7 +193,7 @@ def main():
                                 "token": token,
                                 "new_password": new_password
                             },
-                            timeout=10
+                            timeout=30
                         )
 
                         if response.status_code == 200:
