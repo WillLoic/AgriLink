@@ -22,6 +22,8 @@ if 'token' not in st.session_state or st.session_state['token'] is None:
 
 # --- CONFIGURATION ---
 st.set_page_config(page_title="Administration - AgriLink", layout="wide")
+LOGO_URL= "https://github.com/WillLoic/AgriLink/blob/developpement/Frontend/icon2.jpg"
+st.sidebar.image(LOGO_URL)
 st.markdown("""
     <style>
         /* Masquer la barre de navigation latérale de Streamlit */
