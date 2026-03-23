@@ -3,7 +3,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_mail import Mail
 import click
-from models.config import db, ma, app_context, setup_db
+from models.config import db, ma, app_context, setup_db, mail
 from datetime import datetime
 from flasgger import Swagger
 
@@ -28,9 +28,9 @@ app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL', 'False').lower() == 'true
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', 'willloic36@gmail.com')
-print(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])  # Debug : vérifier les variables d'environnement
+#print(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])  # Debug : vérifier les variables d'environnement
 #mail = Mail(app)
-mail=Mail()
+#mail=Mail()
 
 
 # Configuration simple de Swagger
