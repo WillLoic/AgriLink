@@ -121,7 +121,7 @@ def main():
                         API_URL = os.getenv("API_URL", "http://127.0.0.1:5000")
                         response = requests.post(
                             f"{API_URL}/api/v1/forgot-password",
-                            data={"email": email},
+                            json={"email": email},
                             timeout=50
                         )
 
@@ -135,8 +135,12 @@ def main():
                             </div>
                             """, unsafe_allow_html=True)
                         else:
-                            error_data = response.json()
-                            st.error(f"❌ {error_data.get('error', 'Erreur lors de l\'envoi')}")
+                            # On essaie de lire l'erreur proprement
+                                    try:
+                                        error_msg = response.json().get('error', 'Erreur inconnue')
+                                    except:
+                                        error_msg = f"Le serveur a répondu avec le code {response.status_code}"
+                                    st.error(f"❌ {error_msg}")
 
                     except requests.exceptions.RequestException as e:
                         st.error(f"❌ Erreur de connexion au serveur : {str(e)}")
