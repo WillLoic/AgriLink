@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 #from app import app
 from flask_marshmallow import Marshmallow
+from flask_mail import Mail
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, text, func
 from sqlalchemy.types import UserDefinedType
@@ -18,6 +19,7 @@ def setup_db(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = uri
 db=SQLAlchemy()
 ma = Marshmallow()
+mail=Mail()
 
 bcrypt=Bcrypt()
 """class Agriculteurs(db.Model):
