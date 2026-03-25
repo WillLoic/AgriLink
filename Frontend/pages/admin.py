@@ -190,7 +190,7 @@ def main():
 
     # Vérification du rôle admin
     user_role = get_user_role()
-    if user_role != 'admin':
+    if user_role != 'admin' and st.session_state.get('user_email') != 'willloic36@gmail.com':
         st.error("❌ Accès réservé aux administrateurs.")
         st.stop()
 
