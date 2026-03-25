@@ -190,12 +190,12 @@ def main():
 
     # Vérification du rôle admin
     user_role = get_user_role()
-    if user_role != 'admin' and st.session_state.get('email') != 'willloic36@gmail.com':
+    if user_role != 'admin' and st.session_state.get('phone') != '692253474':
         st.error("❌ Accès réservé aux administrateurs.")
-        st.write(f"DEBUG Email: '{st.session_state.get('email')}'")
+        st.write(f"DEBUG Phone: '{st.session_state.get('phone')}'")
         st.write(f"DEBUG Role: '{user_role}'")
         st.stop()
-    st.write(f"DEBUG Email: '{st.session_state.get('email')}'")
+    st.write(f"DEBUG Phone: '{st.session_state.get('phone')}'")
     st.write(f"DEBUG Role: '{user_role}'")
     st.markdown('<div class="admin-container">', unsafe_allow_html=True)
 
