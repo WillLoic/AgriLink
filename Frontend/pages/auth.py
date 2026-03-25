@@ -90,19 +90,20 @@ with tab1:
         submitted = st.form_submit_button("Se connecter")
 
         if submitted:
-            if login_user(phone, password):
-                # On stocke le token dans l'URL pour qu'il survive au rafraîchissement
-                token = st.session_state['token']
-                try:
-                    st.query_params["t"] = token
-                except Exception:
-                    pass
-
-                st.success("Connexion réussie ! Redirection...")
-                time.sleep(0.5)
-                st.switch_page("pages/dashboard.py")
-            else:
-                st.error("Identifiants incorrects.")
+            with st.spinner("Connexion en cours..."):
+                        if login_user(phone, password):
+                            # On stocke le token dans l'URL pour qu'il survive au rafraîchissement
+                            token = st.session_state['token']
+                            try:
+                                st.query_params["t"] = token
+                            except Exception:
+                                pass
+            
+                            st.success("Connexion réussie ! Redirection...")
+                            time.sleep(0.5)
+                            st.switch_page("pages/dashboard.py")
+                        else:
+                            st.error("Identifiants incorrects.")
 
     # Bouton vers mot de passe oublié
     st.markdown("<div style='text-align: center; margin-top: 1rem;'>", unsafe_allow_html=True)
@@ -152,7 +153,7 @@ with tab2:
             #st.rerun()
 
     if submitted_reg:
-       with st.spinner("Inscription / Connexion en cours..."):
+       with st.spinner("Inscription en cours..."):
         #if len(st.session_state['points_gps']) < 3:
             #st.error("Besoin de 3 points minimum.")
         #else:
