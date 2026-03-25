@@ -175,8 +175,10 @@ def get_user_role():
     try:
         response = requests.get(f"{st.session_state.get('API_URL', 'http://127.0.0.1:5000')}/api/v1/user/profile", headers=headers, timeout=5)
         if response.status_code == 200:
+            st.write(f"Le code est 200")
             user_data = response.json()
             return user_data.get('role')
+            st.write(f"le code n'est pas 200")
         return 'user'
     except:
         return 'user'
