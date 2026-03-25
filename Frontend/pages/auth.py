@@ -71,6 +71,7 @@ def login_user(phone, password):
         if response.status_code == 200:
             data = response.json()
             st.session_state['token'] = data.get('token')
+            st.session_state['phone']=data.get('phone')
             return True
         return False
     except Exception as e:
