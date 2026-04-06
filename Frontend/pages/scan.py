@@ -73,12 +73,14 @@ st.markdown("""
         .option-biologique {
             border-left-color: #28a745;
             background-color: #f0f8f0;
+            
         }
 
         .option-title {
             font-weight: bold;
             font-size: 16px;
             margin-bottom: 8px;
+            color: black;
         }
 
         .produit-info {
