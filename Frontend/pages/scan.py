@@ -164,7 +164,7 @@ if img_file:
         st.warning(scan_block_message or "Vous ne pouvez pas lancer de scan pour le moment.")
     else:
         if st.button("🔍 Lancer l'analyse IA"):
-            with st.spinner("Analyse en cours par Gemini..."):
+            with st.spinner("Analyse en cours..."):
                 try:
                     # Préparation du fichier pour l'envoi
                     files = {"photo": (img_file.name, img_file.getvalue(), img_file.type)}
@@ -354,4 +354,4 @@ with st.expander("ℹ️ **Informations sur les erreurs possibles**"):
     **💾 Erreur de sauvegarde** : L'analyse fonctionne mais les données n'ont pas été enregistrées.
     """)
 
-st.caption("AgriLink IA utilise Gemini 2.5 Flash pour des diagnostics rapides et précis.")
+#st.caption("AgriLink IA utilise Gemini 2.5 Flash pour des diagnostics rapides et précis.")
