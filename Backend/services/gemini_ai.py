@@ -108,71 +108,34 @@ class ScanModels():
         # (ST_Distance en SQL ou calcul Haversine en Python)
 
         prompt = f"""
+        Tu es un expert agronome spécialisé dans le diagnostic des plantes en contexte africain.
+        Ta mission est d’analyser une image de plante et de fournir un diagnostic clair, fiable et directement exploitable.
+        
         Étape 1 : ANALYSE DE QUALITÉ
         Vérifie si cette image est exploitable pour un diagnostic agronomique (Netteté, Luminosité, Présence de végétaux).
         Si l'image est floue, trop sombre, ou ne contient pas de plantes, renvoie UNIQUEMENT :
         {{"statut_sante": "REJETÉ", "diagnostic_precis": "Qualité image insuffisante : [RAISON]"}}
 
         Étape 2 : DIAGNOSTIC (Si qualité OK)
-        Analyse cette photo de {parcelle.culture_type} et produis un diagnostic structuré, clair et exploitable par un agriculteur ou technicien agricole.
-        Tu es un expert agronome spécialisé dans le diagnostic des maladies des plantes en contexte africain.
-
-Analyse l’image fournie 
-
-Réponds STRICTEMENT voici le format du diagnostic:
-
-1. ÉTAT GÉNÉRAL DE LA PLANTE
-- Décris brièvement l’état visuel (sain, stressé, gravement atteint, etc.)
-
-2. DIAGNOSTIC PRINCIPAL
-- Maladie ou problème le plus probable
-- Niveau de confiance (en %)
-- Symptômes observés qui justifient ce diagnostic
-
-3. DIAGNOSTICS ALTERNATIFS (max 2)
-- Autres hypothèses possibles avec faible probabilité
-
-4. CAUSES PROBABLES
-- Explique les causes possibles (climat, eau, sol, parasites, pratiques agricoles)
-
-5. PROTOCOLE 1 (RECOMMANDÉ - solution optimale)
-- Actions à faire immédiatement
-- Produits ou traitements à utiliser (si possible adaptés contexte local)
-- Fréquence d’application
-- Résultat attendu
-
-6. PROTOCOLE 2 (ALTERNATIF - solution accessible)
-- Solution moins coûteuse ou plus simple
-- Méthode naturelle ou locale si possible
-- Résultat attendu
-
-7. NIVEAU D’URGENCE
-- Faible / Moyen / Élevé / Critique
-- Délai maximum d’intervention recommandé
-
-8. CONSEIL PRÉVENTIF
-- Comment éviter que ce problème se reproduise
-
-Contraintes importantes :
-- Utilise un langage simple compréhensible par un agriculteur
-- Évite le jargon technique complexe
-- Ne donne pas de réponse vague
-- Si l’image est incertaine, indique-le clairement
-- Priorise les actions concrètes et applicables sur le terrain africain
-
-Objectif : aider à la prise de décision rapide pour réduire les pertes agricoles.
+        Fais une analyse detaillée et approfondie de la photo de {parcelle.culture_type} .
+        Tu es un expert en pathologie végétale.
         STRUCTURE JSON ATTENDUE :
         {{
             "statut_sante": "SAIN" ou "MALADE",
-            "diagnostic_precis": "string",
+            "diagnostic_precis": "Diagnostic principal : ... | Symptômes : ... | Hypothèses secondaires : ... | Causes probables : ...",
             "confiance_diagnostic": "X%",
             "facteur_sante": float (entre 0.1 et 1.0),
             "protocole_intervention": {{
-                "option_A_chimique": {{ "produit_actif": "string", "dosage_recommande": "string" }},
-                "option_B_biologique": {{ "produit_actif": "string", "dosage_recommande": "string" }}
+                "option_A_chimique": {{
+                  "produit_actif": "nom du traitement recommandé",
+                  "dosage_recommande": "quantité + fréquence + durée"
+                }},
+                "option_B_biologique": {{
+                  "produit_actif": "solution naturelle ou locale",
+                  "dosage_recommande": "méthode + fréquence"
+    }}
             }}
-        }}
-        """
+        }} """
         
 
         
