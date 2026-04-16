@@ -1,0 +1,34 @@
+voici mon architecture ne l'oublie pas :
+lib/
+├── main.dart                 # Point d'entrée (Gestion de la route initiale selon le token)
+├── routes.dart               # Définition de toutes les routes (remplace tes st.switch_page)
+│
+├── shared/                   # Éléments communs (Header vert, logo, styles CSS portés en Dart)
+│   ├── widgets/              # Cartes utilisateurs, boutons stylisés AgriLink
+│   └── constants.dart        # URL de l'API (Render), couleurs #2e7d32
+│
+├── services/                 # Logique métier (Ce qu'il y avait dans tes fonctions utilitaires)
+│   ├── auth_service.dart     # Login, Register, Forgot/Reset
+│   ├── scan_service.dart     # Envoi YOLO/CNN
+│   └── admin_service.dart    # Get_all_users, promote/demote
+│
+└── views/                    # Tes "Pages" Streamlit converties en Widgets Flutter
+    ├── landing_view.dart     # Ta page d'accueil marketing
+    ├── auth/
+    │   ├── login_view.dart
+    │   ├── register_view.dart
+    │   └── password_recovery_view.dart # (Forgot & Reset)
+    ├── dashboard/
+    │   ├── user_dashboard_view.dart
+    │   └── admin_panel_view.dart       # Ton admin.py (accès protégé)
+    ├── scan/
+    │   └── scan_view.dart
+    └── history/
+        └── history_view.dart
+
+
+
+	<key>NSCameraUsageDescription</key>
+	<string>AgriLink a besoin de la caméra pour scanner les plantes.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>AgriLink a besoin de la galerie pour analyser vos photos.</string>
