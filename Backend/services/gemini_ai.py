@@ -159,9 +159,9 @@ class ScanModels():
                             response_mime_type="application/json"
                         )
                     )
-                models = client.models.list()
-                for model in models:
-                    print(f'✅ {model.name} → ID: {model.id}')
+                #models = client.models.list()
+                #for model in models:
+                #    print(f'✅ {model.name} → ID: {model.id}')
             except Exception as api_error:
                 # Gestion spécifique des erreurs Gemini
                 error_str = str(api_error).lower()
