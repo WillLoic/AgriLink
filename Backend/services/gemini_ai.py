@@ -150,7 +150,7 @@ class ScanModels():
             # Appel avec le SDK moderne (Gemini 2.5 Flash)
             try:
                 response = client.models.generate_content(
-                        model="gemini-1.5-flash", #gemini-2.5-flash-Lite pour un plus grand quota mais des réponses moins détaillées
+                        model="gemini-2.5-flash", #gemini-2.5-flash-Lite pour un plus grand quota mais des réponses moins détaillées
                         contents=[
                             prompt,
                             types.Part.from_bytes(data=img, mime_type=file.content_type)
